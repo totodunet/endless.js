@@ -40,8 +40,6 @@
 		//Default values
 		var defaults={
 			direction:'down',
-			append:function(){},
-			prepend:function(){}
 		};
 		
 		//Settings
