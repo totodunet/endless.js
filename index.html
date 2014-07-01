@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<!--
+
+████████╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗███╗   ██╗███████╗████████╗
+╚══██╔══╝██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗██║   ██║████╗  ██║██╔════╝╚══██╔══╝
+   ██║   ██║   ██║   ██║   ██║   ██║██║  ██║██║   ██║██╔██╗ ██║█████╗     ██║
+   ██║   ██║   ██║   ██║   ██║   ██║██║  ██║██║   ██║██║╚██╗██║██╔══╝     ██║
+   ██║   ╚██████╔╝   ██║   ╚██████╔╝██████╔╝╚██████╔╝██║ ╚████║███████╗   ██║
+   ╚═╝    ╚═════╝    ╚═╝    ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
+
+/******************************************************************/
+/*                                                                */
+/*                   Endless.JS Demonstration                     */
+/*                                                                */
+/*              Site internet realise par Totodunet               */
+/*                         www.totodu.net                         */
+/*                                                                */
+/******************************************************************/
+
+-->
+
+<html lang="en-US">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+        <meta name="author" content="Totodunet - www.totodu.net"/>
+        <meta name="description" content="Endless.JS is a jQuery plugin allows to do website designed in cycle!"/>
+        <meta name="keywords" content="endless.js, jQuery plugin, unlimit scroll"/>
+        <meta name="robots" content="index,follow"/>
+        <title>Endless.JS - jQuery Plugin</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+		
+		<!-- Import jQuery Library -->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		
+		<!-- Endless.JS Plugin -->
+		<script type="text/javascript" src="js/endless.js"></script>
+		
+		<!-- JS script using endless.JS Plugin -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(document).endless({
+					direction:'duo'
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<span class="forkongithub"><a href="https://github.com/totodunet/endless.js/" target="_blank">Fork me on GitHub</a></span>
+		<div class="wrapper">
+			<p>TOP</p>
+			<article>
+				<h1>Discover Endless.JS Plugin!</h1>
+				<p>Hello webmaster! Are you here because you search an original plugin for your website? This article is a demonstration of my jQuery plugin "Endless.JS". Endless.JS allows to do websites designed in cycle.</p>
+				<p>The idea is to join the top with the bottom. I hope in the next version you'll be able to join the left with the right. Your website will allowed to look like a sphere^^.</p>
+				<p>The installation is very easy. You must just integrate endless.js in the HTML head (after to have import jQuery Library) of your website and to create a little JavaScript snippet to specify which elements will be endless. You can view the source-code of this page by right click in doubt case.<p>
+				<p>Example :</p>
+				<div class="code">
+					<p><span>&lt;!-- Import jQuery Library --&gt;</span></p>
+					<p>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"&gt;&lt;/script&gt;</p>
+					<p><span>&lt;!-- Integrate endless.js plugin --&gt;</span></p>
+					<p>&lt;script type="text/javascript" src="js/endless.js"&gt;&lt;/script&gt;</p>
+					<p><span>&lt;!-- Script using endless.js --&gt;</span></p>
+					<p>&lt;script type="text/javascript"&gt;</p>
+						<p>$(document).ready(function(){
+						<p>$('yourElement').endless({</p>
+						<p>direction:'duo', <span>//Direction : up (infinite top scrolling), down (infinite bottom scrolling), duo (infinite top and bottom scrolling)</span></p>
+						<p>scrollbar:'disable' <span>//Enable or disable the scrollbar</span></p>
+						<p>});});&lt;/script&gt;</p>
+				</div>
+				<p>Plugin is available on GitHub</p><p><a href="https://github.com/totodunet/endless.js/" target="_blank"><img alt="github" src="http://blog.hatemalimam.com/wp-content/uploads/2013/12/github_login_icon.gif"/></a></p>
+				<p><small>Endless.js is actually in development. It's advisable to not use id in your HTML code element which is in endless, prefer classes.</small></p>
+			</article>
+			<p>Copyright 2014, <a href="http://totodu.net/" target="_blank">Totodunet</a> - Endless.JS is distributed under Creative Commons Attribution 4.0 International License<p>
+			<p>BOTTOM</p>
+		</div>
+	</body>
+</html>
