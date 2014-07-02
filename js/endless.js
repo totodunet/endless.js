@@ -26,26 +26,30 @@
 	
 	$.fn.endless=function(options){
 	
-		//Variables used
-		var high=$(this).prop('scrollHeight');
-		var content=$(this).html();
-		var position=$(this).scrollTop();
-		
-		//if the object is document => change variables
-		if($(this).is(document))
-			high=$(this).height();
-		if($(this).is(document))
-			content=$('body').html();
-		
 		//Default values
 		var defaults={
+			element:$(this),
 			direction:'down',
-			append:function(){},
-			prepend:function(){}
+			append:nothing,
+			prepend:nothing,
+			nappend:nothing,
+			nprepend:nothing
 		};
 		
 		//Settings
 		var settings=$.extend(defaults,options);
+	
+		//Variables used
+		var high=$(this).prop('scrollHeight');
+		var content=settings.element.html();
+		var position=$(this).scrollTop();
+		var nothing=function(){};
+		
+		//if the object is document => change variables
+		if($(this).is(document))
+			high=$(this).height();
+		if(settings.element.is(document))
+			content=$('body').html();
 		
 		//Enable-Disable the scrollbar
 		if(settings.scrollbar&&(settings.scrollbar=='enable'||settings.scrollbar=='disable')){
@@ -107,6 +111,7 @@
 							position=high-1;
 						}
 						append=false;
+						settings.nprepend.call();
 					}
 				}
 			});
@@ -136,6 +141,7 @@
 						$(this).scrollTop(1);
 						position=1;
 						prepend=false;
+						settings.nprepend.call();
 					}
 				}
 				//Scroll up
@@ -163,6 +169,7 @@
 							position=high-1;
 						}
 						append=false;
+						settings.nappend.call();
 					}
 				}
 			});
@@ -205,6 +212,7 @@
 							$(this).scrollTop(1);
 							position=1;
 							prepend=false;
+							settings.nappend.call();
 						}
 				}
 			});
