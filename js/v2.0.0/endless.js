@@ -8,13 +8,10 @@
 	  Needs the jQuery library. You can download it here : http://www.jquery.com/
 	  
 	  @author 	totodunet
-	  @date		May 13, 2014
+	  @date		August 14, 2014
 	  @version	2.0.0
 	  
 	  @site		http://totodu.net/
-	  
-	  todo : voir pour regrouper les elements cibles dans une div.
-	  cette div lui appliquer des styles css float pour le scroll left or/and right
 	  	  
 */
 
