@@ -1,4 +1,4 @@
-﻿/* 
+/* 
 
 	  Plugin jQuery endless.js
 	  
@@ -26,6 +26,9 @@
 	
 	$.fn.endless=function(options){
 	
+		//null function
+		var nothing=function(){};
+	
 		//Default values
 		var defaults={
 			element:$(this),
@@ -43,7 +46,6 @@
 		var high=$(this).prop('scrollHeight');
 		var content=settings.element.html();
 		var position=$(this).scrollTop();
-		var nothing=function(){};
 		
 		//if the object is document => change variables
 		if($(this).is(document))

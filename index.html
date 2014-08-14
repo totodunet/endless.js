@@ -13,7 +13,7 @@
 /*                                                                */
 /*                   Endless.JS Demonstration                     */
 /*                                                                */
-/*              Site internet realise par Totodunet               */
+/*              			by Totodunet                          */
 /*                         www.totodu.net                         */
 /*                                                                */
 /******************************************************************/
@@ -34,7 +34,7 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		
 		<!-- Endless.JS Plugin -->
-		<script type="text/javascript" src="js/endless.js"></script>
+		<script type="text/javascript" src="js/v2.0.0/endless.js"></script>
 		
 		<!-- JS script using endless.JS Plugin -->
 		<script type="text/javascript">
@@ -43,10 +43,10 @@
 				var prepend=false;
 				var append=false;
 				$(document).endless({
-					direction:'duo',
-					prepend:function(){$('.wrapper:first-child .count').text(count-1);prepend=true;},
-					append:function(){$('.wrapper:nth-child(2) .count').text(count+1);append=true;},
-					nprepend:function(){
+					direction:'vertical',
+					prepend:function(){$('.endless:first-child .count').text(count-1);prepend=true;},
+					append:function(){$('.endless:nth-child(2) .count').text(count+1);append=true;},
+					n_prepend:function(){
 						if(prepend)
 							$('.count').text(count);
 						else
@@ -54,7 +54,7 @@
 						append=false;
 						prepend=false;
 					},
-					nappend:function(){
+					n_append:function(){
 						if(append)
 							$('.count').text(count);
 						else
@@ -85,12 +85,12 @@
 					<p>&lt;script type="text/javascript"&gt;</p>
 						<p>$(document).ready(function(){
 						<p>$('yourElement').endless({</p>
-						<p>direction:'duo', <span>//Direction : up (infinite top scrolling), down (infinite bottom scrolling), duo (infinite top and bottom scrolling)</span></p>
+						<p>direction:'vertical', <span>//Direction : up (infinite top scrolling), down (infinite bottom scrolling), vertical (infinite top and bottom scrolling)</span></p>
 						<p>scrollbar:'enable', <span>//Enable or disable the scrollbar</span></p>
 						<p>prepend:function(){alert("there isn't the boundary at the top");}, <span>//Function that executes when content is prepended</span></p>
 						<p>append:function(){alert("there isn't the boundary at the bottom");}, <span>//Function that executes when content is appended</span></p>
-						<p>nprepend:function(){alert("you are now at the top");}, <span>//Function that executes when content in duplicate is removed and that you come from the top</span></p>
-						<p>nappend:function(){alert("you are now at the bottom");}, <span>//Function that executes when content in duplicate is removed and that you come from the bottom</span></p>
+						<p>n_prepend:function(){alert("you are now at the top");}, <span>//Function that executes when content in duplicate is removed and that you come from the top</span></p>
+						<p>n_append:function(){alert("you are now at the bottom");} <span>//Function that executes when content in duplicate is removed and that you come from the bottom</span></p>
 						<p>});</p><p>});&lt;/script&gt;</p>
 				</div>
 				<p>Plugin is available on GitHub</p><p><a href="https://github.com/totodunet/endless.js/" target="_blank"><img alt="github" src="http://blog.hatemalimam.com/wp-content/uploads/2013/12/github_login_icon.gif"/></a></p>
