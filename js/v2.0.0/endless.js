@@ -38,6 +38,9 @@
 	
 	$.fn.endless=function(options){
 	
+		//null function
+		var nothing=function(){};
+	
 		//Default values
 		var defaults={
 			element:$(this),
@@ -61,15 +64,18 @@
 		var content='<div class="endless">'+settings.element.html()+'</div>';
 		var top_position=$(this).scrollTop();
 		var left_position=$(this).scrollLeft();
-		var nothing=function(){};
 		
-		//if the object is document => change variables
+		//if the object is document => change variables + encapsulate in div html
 		if($(this).is(document)){
 			high=$(this).height();
 			width=$(this).width();
 		}
-		if(settings.element.is(document))
+		if(settings.element.is(document)){
 			content='<div class="endless">'+$('body').html()+'</div>';
+			$('body').html(content);
+		}
+		else
+			$(this).html(content);
 		
 		//Enable-Disable the scrollbar
 		if(settings.scrollbar&&(settings.scrollbar=='enable'||settings.scrollbar=='disable')){
@@ -119,6 +125,8 @@
 							$(this).html(content);
 						$(this).scrollTop(1);
 						top_position=1;
+						append=false;
+						settings.n_prepend.call();
 					}
 				}
 				else if(append){
@@ -167,6 +175,8 @@
 							$(this).scrollTop(high-1);
 							top_position=high-1;
 						}
+						prepend=false;
+						settings.n_append.call();
 					}
 				}
 				else if(prepend){
@@ -254,32 +264,48 @@
 				if(left_position<$(this).scrollLeft()){
 					left_position=$(this).scrollLeft();
 					if($(this).scrollRight()==0){
-						if($(this).is(document))
+						if($(this).is(document)){
+							$('body').css('width',$('body').width()*2);
+							$('body').children('.endless').css('float','left');
 							$('body').append(content);
-						else
+							$('body').children('.endless:nth-child(2)').css('float','right');
+						}
+						else{
+							$(this).css('width',$(this).width()*2);
+							$(this).children('.endless').css('float','left');
 							$(this).append(content);
+							$(this).children('.endless:nth-child(2)').css('float','right');
+						}
 						$(this).scrollLeft(left_position);
 						append=true;
 						settings.l_append.call();
 					}
 					else if($(this).scrollLeft()>=width){
-						if($(this).is(document))
+						if($(this).is(document)){
 							$('body').html(content);
-						else
+							$('body').css('width',$('body').width()/2);
+						}
+						else{
 							$(this).html(content);
+							$(this).css('width',$(this).width()/2);
+						}
 						$(this).scrollLeft(1);
 						left_position=1;
+						append=false;
+						settings.nl_prepend.call();
 					}
 				}
 				else if(append){
 					if($(this).scrollRight()>=width){
 						if($(this).is(document)){
 							$('body').html(content);
+							$('body').css('width',$('body').width()/2);
 							$(this).scrollLeft(width-$(window).width()-1);
 							left_position=$(this).scrollLeft();
 						}
 						else{
 							$(this).html(content);
+							$(this).css('width',$(this).width()/2);
 							$(this).scrollLeft(width-1);
 							left_position=width-1;
 						}
@@ -294,13 +320,22 @@
 		
 		else if(settings.direction=='left'){
 			$(this).scroll(function(){
-				if (left_position>=$(this).scrollLeft()){
+				//Scroll left
+				if(left_position>=$(this).scrollLeft()){
 					left_position=$(this).scrollLeft();
 					if($(this).scrollLeft()==0){
-						if($(this).is(document))
+						if($(this).is(document)){
+							$('body').css('width',$('body').width()*2);
+							$('body').children('.endless').css('float','right');
 							$('body').prepend(content);
-						else
+							$('body').children('.endless:first-child').css('float','left');
+						}
+						else{
+							$(this).css('width',$(this).width()*2);
+							$(this).children('.endless').css('float','right');
 							$(this).prepend(content);
+							$(this).children('.endless:first-child').css('float','left');
+						}
 						$(this).scrollLeft(width);
 						left_position=$(this).scrollLeft();
 						prepend=true;
@@ -309,22 +344,30 @@
 					else if($(this).scrollRight()>=width){
 						if($(this).is(document)){
 							$('body').html(content);
+							$('body').css('width',$(this).width()/2);
 							$(this).scrollLeft(width-$(window).width()-1);
 							left_position=$(this).scrollLeft();
 						}
 						else{
 							$(this).html(content);
+							$(this).css('width',$(this).width()/2);
 							$(this).scrollLeft(width-1);
 							left_position=width-1;
 						}
+						prepend=false;
+						settings.nl_append.call();
 					}
 				}
 				else if(prepend){
 						if($(this).scrollLeft()>=width){
-							if($(this).is(document))
+							if($(this).is(document)){
 								$('body').html(content);
-							else
+								$('body').css('width',$(this).width()/2);
+							}
+							else{
 								$(this).html(content);
+								$(this).css('width',$(this).width()/2);
+							}
 							$(this).scrollLeft(1);
 							left_position=1;
 							prepend=false;
@@ -343,19 +386,31 @@
 				if(left_position<$(this).scrollLeft()){
 					left_position=$(this).scrollLeft();
 					if($(this).scrollRight()==0){
-						if($(this).is(document))
+						if($(this).is(document)){
+							$('body').css('width',$('body').width()*2);
+							$('body').children('.endless').css('float','left');
 							$('body').append(content);
-						else
+							$('body').children('.endless:nth-child(2)').css('float','right');
+						}
+						else{
+							$(this).css('width',$(this).width()*2);
+							$(this).children('.endless').css('float','left');
 							$(this).append(content);
+							$(this).children('.endless:nth-child(2)').css('float','right');
+						}
 						$(this).scrollLeft(left_position);
 						append=true;
 						settings.l_append.call();
 					}
 					else if($(this).scrollLeft()>=width){
-						if($(this).is(document))
+						if($(this).is(document)){
 							$('body').html(content);
-						else
+							$('body').css('width',$(this).width()/2);
+						}
+						else{
 							$(this).html(content);
+							$(this).css('width',$(this).width()/2);
+						}
 						$(this).scrollLeft(1);
 						left_position=1;
 						prepend=false;
@@ -366,10 +421,18 @@
 				else if(left_position>=$(this).scrollLeft()){
 					left_position=$(this).scrollLeft();
 					if($(this).scrollLeft()==0){
-						if($(this).is(document))
+						if($(this).is(document)){
+							$('body').css('width',$('body').width()*2);
+							$('body').children('.endless').css('float','right');
 							$('body').prepend(content);
-						else
-							$(this).prepend(content);
+							$('body').children('.endless:first-child').css('float','left');
+						}
+						else{
+							$('body').css('width',$('body').width()*2);
+							$('body').children('.endless').css('float','right');
+							$('body').prepend(content);
+							$('body').children('.endless:first-child').css('float','left');
+						}
 						$(this).scrollLeft(width);
 						left_position=$(this).scrollLeft();
 						prepend=true;
@@ -378,11 +441,13 @@
 					else if($(this).scrollRight()>=width){
 						if($(this).is(document)){
 							$('body').html(content);
+							$('body').css('width',$(this).width()/2);
 							$(this).scrollLeft(width-$(window).width()-1);
 							left_position=$(this).scrollLeft();
 						}
 						else{
 							$(this).html(content);
+							$(this).css('width',$(this).width()/2); 
 							$(this).scrollLeft(width-1);
 							left_position=width-1;
 						}
