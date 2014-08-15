@@ -2,7 +2,7 @@
 
 	  Plugin jQuery endless.js
 	  
-	  This plugin allows to join the top with the bottom of a HTML container.
+	  This plugin allows to join the top with the bottom or the left with the right of a HTML container.
 	  Useful to do websites designed in cycle!
 	  
 	  Needs the jQuery library. You can download it here : http://www.jquery.com/
@@ -80,16 +80,32 @@
 		//Enable-Disable the scrollbar
 		if(settings.scrollbar&&(settings.scrollbar=='enable'||settings.scrollbar=='disable')){
 			if(settings.scrollbar=='disable'){
-				if($(this).is(document))
-					$('body').css('overflow','hidden');
-				else
-					$(this).css('overflow','hidden');
+				if(settings.direction=='down'||settings.direction=='up'||settings.direction=='vertical'){
+					if($(this).is(document))
+						$('body').css('overflow-y','hidden');
+					else
+						$(this).css('overflow-y','hidden');
+				}
+				else{
+					if($(this).is(document))
+						$('body').css('overflow-x','hidden');
+					else
+						$(this).css('overflow-x','hidden');
+				}
 			}
 			else{
-				if($(this).is(document))
-					$('body').css('overflow-y','scroll');
-				else
-					$(this).css('overflow-y','scroll');
+				if(settings.direction=='down'||settings.direction=='up'||settings.direction=='vertical'){
+					if($(this).is(document))
+						$('body').css('overflow-y','scroll');
+					else
+						$(this).css('overflow-y','scroll');
+				}
+				else{
+					if($(this).is(document))
+						$('body').css('overflow-x','scroll');
+					else
+						$(this).css('overflow-x','scroll');
+				}
 			}
 		}
 
