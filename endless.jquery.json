@@ -25,6 +25,7 @@
             "url": "http://opensource.org/licenses/MIT"
         }
     ],
+	"demo": "http://totodunet.github.io/",
 	"bugs": "https://github.com/totodunet/endless.js/issues",
     "homepage": "http://totodunet.github.io/",
     "docs": "https://github.com/totodunet/endless.js",
