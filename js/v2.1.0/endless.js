@@ -8,8 +8,8 @@
 	  Needs the jQuery library. You can download it here : http://www.jquery.com/
 	  
 	  @author 	totodunet
-	  @date		August 14, 2014
-	  @version	2.0.0
+	  @date		August 27, 2014
+	  @version	2.1.0
 	  
 	  @website	http://totodu.net/
 	  
@@ -87,12 +87,42 @@
 		//if the object is document => change variables + encapsulate in element's html div
 		if($(this).is(document)){
 			left_position=$(this).scrollLeft();
-			content='<div class="endless">'+$('body').html()+'</div>';
+			if(settings.direction=='down'||settings.direction=='up'||settings.direction=='vertical'){
+				//if the element's height is smaller than his parent => add content or increase height
+				if($('body').height()<=$(window).height()){
+					content='<div class="endless" style="height:'+($(window).height()+2)+'px;">'+$('body').html()+'</div>';
+					$('body').css('height',$(window).height()+2);
+				}
+				else
+					content='<div class="endless">'+$('body').html()+'</div>';
+			}
+			else{
+				//if the element's width is smaller than his parent => add content or increase width
+				if($('body').width()<=$(window).width()){
+					content='<div class="endless" style="width:'+($(window).width()+2)+'px;">'+$('body').html()+'</div>';
+					$('body').css('width',$(window).width()+2);
+				}
+				else
+					content='<div class="endless">'+$('body').html()+'</div>';
+			}
 			$('body').html(content);
 		}
 		else{
 			left_position=$(this).parent().scrollLeft();
-			content='<div class="endless">'+$(this).html()+'</div>';
+			if(settings.direction=='down'||settings.direction=='up'||settings.direction=='vertical'){
+				//if the element's height is smaller than his parent => add content or increase height
+				if($(this).offset().top+$(this).height()<=$(this).parent().height())
+					content='<div class="endless" style="height:'+($(this).parent().height()+2)+'px;">'+$(this).html()+'</div>';
+				else
+					content='<div class="endless">'+$(this).html()+'</div>';
+			}
+			else{
+				//if the element's width is smaller than his parent => add content or increase width
+				if($(this).offset().left+$(this).width()<=$(this).parent().width())
+					content='<div class="endless" style="width:'+($(this).parent().width()+2)+'px;">'+$(this).html()+'</div>';
+				else
+					content='<div class="endless">'+$(this).html()+'</div>';
+			}
 			$(this).html(content);
 		}
 		

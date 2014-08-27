@@ -1,8 +1,8 @@
 /* 
 
-	  Plugin jQuery endless.js
+	  jQuery plugin endless.js
 	  
-	  This plugin allows to join the top with the bottom of a HTML container.
+	  This plugin allows to join the top with the bottom or the left with the right of a HTML container.
 	  Useful to do websites designed in cycle!
 	  
 	  Needs the jQuery library. You can download it here : http://www.jquery.com/
@@ -11,17 +11,43 @@
 	  @date		May 13, 2014
 	  @version	1.0.0
 	  
-	  @site		http://totodu.net/
+	  @website	http://totodu.net/
+	  
+	  @license
+	  The MIT License (MIT)
+
+		Copyright (c) 2014 - Totodunet (www.totodu.net)
+
+		Permission is hereby granted, free of charge, to any person obtaining a copy
+		of this software and associated documentation files (the "Software"), to deal
+		in the Software without restriction, including without limitation the rights
+		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+		copies of the Software, and to permit persons to whom the Software is
+		furnished to do so, subject to the following conditions:
+
+		The above copyright notice and this permission notice shall be included in
+		all copies or substantial portions of the Software.
+
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+		THE SOFTWARE.
 	  	  
 */
 
 (function($)
 {
+
+	//Function scrollBottom() -> inverted scrollTop() function
+	
 	$.fn.scrollBottom=function(){
 		if($(this).is(document))
-			return $(this).height()-(this.scrollTop()+$(window).height());
+			return $(this).height()-($(this).scrollTop()+$(window).height());
 		else
-			return $(this).height()-($(this).prop('scrollHeight')-$(this).scrollTop());
+			return ($(this).prop('scrollHeight')-$(this).prop('offsetHeight'))-$(this).scrollTop();
 	}
 	
 	$.fn.endless=function(options){
@@ -31,27 +57,33 @@
 	
 		//Default values
 		var defaults={
-			element:$(this),
 			direction:'down',
 			append:nothing,
 			prepend:nothing,
-			nappend:nothing,
-			nprepend:nothing
+			n_append:nothing,
+			n_prepend:nothing
 		};
 		
 		//Settings
 		var settings=$.extend(defaults,options);
 	
+		//Settings
+		var settings=$.extend(defaults,options);
+	
 		//Variables used
-		var high=$(this).prop('scrollHeight');
-		var content=settings.element.html();
-		var position=$(this).scrollTop();
+		var high=$(this).height();
+		var content;
+		var top_position=$(this).scrollTop();
 		
-		//if the object is document => change variables
-		if($(this).is(document))
-			high=$(this).height();
-		if(settings.element.is(document))
-			content=$('body').html();
+		//if the object is document => change variables + encapsulate in element's html div
+		if($(this).is(document)){
+			content='<div class="endless">'+$('body').html()+'</div>';
+			$('body').html(content);
+		}
+		else{
+			content='<div class="endless">'+$(this).html()+'</div>';
+			$(this).html(content);
+		}
 		
 		//Enable-Disable the scrollbar
 		if(settings.scrollbar&&(settings.scrollbar=='enable'||settings.scrollbar=='disable')){
@@ -76,18 +108,19 @@
 		var prepend=false;
 		
 		//Down
+		
 		if(settings.direction=='down'){
 		
 			$(this).scroll(function(){
 				//Scroll down
-				if(position<$(this).scrollTop()){
-					position=$(this).scrollTop();
+				if(top_position<$(this).scrollTop()){
+					top_position=$(this).scrollTop();
 					if($(this).scrollBottom()==0){
 						if($(this).is(document))
 							$('body').append(content);
 						else
 							$(this).append(content);
-						$(this).scrollTop(position);
+						$(this).scrollTop(top_position);
 						append=true;
 						settings.append.call();
 					}
@@ -97,7 +130,9 @@
 						else
 							$(this).html(content);
 						$(this).scrollTop(1);
-						position=1;
+						top_position=1;
+						append=false;
+						settings.n_prepend.call();
 					}
 				}
 				else if(append){
@@ -105,90 +140,33 @@
 						if($(this).is(document)){
 							$('body').html(content);
 							$(this).scrollTop(high-$(window).height()-1);
-							position=$(this).scrollTop();
+							top_position=$(this).scrollTop();
 						}
 						else{
 							$(this).html(content);
 							$(this).scrollTop(high-1);
-							position=high-1;
+							top_position=high-1;
 						}
 						append=false;
-						settings.nprepend.call();
-					}
-				}
-			});
-		}
-		
-		//Up and Down (Duo)
-		else if(settings.direction=='duo'){
-		
-			$(this).scroll(function(){
-				//Scroll down
-				if(position<$(this).scrollTop()){
-					position=$(this).scrollTop();
-					if($(this).scrollBottom()==0){
-						if($(this).is(document))
-							$('body').append(content);
-						else
-							$(this).append(content);
-						$(this).scrollTop(position);
-						append=true;
-						settings.append.call();
-					}
-					else if($(this).scrollTop()>=high){
-						if($(this).is(document))
-							$('body').html(content);
-						else
-							$(this).html(content);
-						$(this).scrollTop(1);
-						position=1;
-						prepend=false;
-						settings.nprepend.call();
-					}
-				}
-				//Scroll up
-				else if(position>=$(this).scrollTop()){
-					position=$(this).scrollTop();
-					if($(this).scrollTop()==0){
-						if($(this).is(document))
-							$('body').prepend(content);
-						else
-							$(this).prepend(content);
-						$(this).scrollTop(high);
-						position=$(this).scrollTop();
-						prepend=true;
-						settings.prepend.call();
-					}
-					else if($(this).scrollBottom()>=high){
-						if($(this).is(document)){
-							$('body').html(content);
-							$(this).scrollTop(high-$(window).height()-1);
-							pos=$(this).scrollTop();
-						}
-						else{
-							$(this).html(content);
-							$(this).scrollTop(high-1);
-							position=high-1;
-						}
-						append=false;
-						settings.nappend.call();
+						settings.n_prepend.call();
 					}
 				}
 			});
 		}
 		
 		//Up
-		else{
+		
+		else if(settings.direction=='up'){
 			$(this).scroll(function(){
-				if (position>=$(this).scrollTop()){
-					position=$(this).scrollTop();
+				if (top_position>=$(this).scrollTop()){
+					top_position=$(this).scrollTop();
 					if($(this).scrollTop()==0){
 						if($(this).is(document))
 							$('body').prepend(content);
 						else
 							$(this).prepend(content);
 						$(this).scrollTop(high);
-						position=$(this).scrollTop();
+						top_position=$(this).scrollTop();
 						prepend=true;
 						settings.prepend.call();
 					}
@@ -196,13 +174,15 @@
 						if($(this).is(document)){
 							$('body').html(content);
 							$(this).scrollTop(high-$(window).height()-1);
-							position=$(this).scrollTop();
+							top_position=$(this).scrollTop();
 						}
 						else{
 							$(this).html(content);
 							$(this).scrollTop(high-1);
-							position=high-1;
+							top_position=high-1;
 						}
+						prepend=false;
+						settings.n_append.call();
 					}
 				}
 				else if(prepend){
@@ -212,10 +192,69 @@
 							else
 								$(this).html(content);
 							$(this).scrollTop(1);
-							position=1;
+							top_position=1;
 							prepend=false;
-							settings.nappend.call();
+							settings.n_append.call();
 						}
+				}
+			});
+		}
+		
+		//Up and Down (Vertical)
+		
+		else if(settings.direction=='vertical'){
+		
+			$(this).scroll(function(){
+				//Scroll down
+				if(top_position<$(this).scrollTop()){
+					top_position=$(this).scrollTop();
+					if($(this).scrollBottom()==0){
+						if($(this).is(document))
+							$('body').append(content);
+						else
+							$(this).append(content);
+						$(this).scrollTop(top_position);
+						append=true;
+						settings.append.call();
+					}
+					else if($(this).scrollTop()>=high){
+						if($(this).is(document))
+							$('body').html(content);
+						else
+							$(this).html(content);
+						$(this).scrollTop(1);
+						top_position=1;
+						prepend=false;
+						settings.n_prepend.call();
+					}
+				}
+				//Scroll up
+				else if(top_position>=$(this).scrollTop()){
+					top_position=$(this).scrollTop();
+					if($(this).scrollTop()==0){
+						if($(this).is(document))
+							$('body').prepend(content);
+						else
+							$(this).prepend(content);
+						$(this).scrollTop(high);
+						top_position=$(this).scrollTop();
+						prepend=true;
+						settings.prepend.call();
+					}
+					else if($(this).scrollBottom()>=high){
+						if($(this).is(document)){
+							$('body').html(content);
+							$(this).scrollTop(high-$(window).height()-1);
+							top_position=$(this).scrollTop();
+						}
+						else{
+							$(this).html(content);
+							$(this).scrollTop(high-1);
+							top_position=high-1;
+						}
+						append=false;
+						settings.n_append.call();
+					}
 				}
 			});
 		}
