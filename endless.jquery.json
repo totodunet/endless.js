@@ -25,7 +25,7 @@
             "url": "http://opensource.org/licenses/MIT"
         }
     ],
-    "homepage": "https://github.com/totodunet/endless.js",
+    "homepage": "http://totodunet.github.io/",
     "docs": "https://github.com/totodunet/endless.js",
     "download": "http://code.totodu.net/js/endless.js",
     "dependencies": {
