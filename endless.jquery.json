@@ -1,6 +1,6 @@
 {
-    "name": "endless.js",
-    "title": "jQuery Scroll Endless",
+    "name": "endless",
+    "title": "jQuery scroll endless",
     "description": "jQuery plugin for infinite scroll on HTML element.",
     "keywords": [
         "scroll",
