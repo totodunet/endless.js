@@ -30,6 +30,12 @@ default values
     
     the scrollbar parameter default value depends of your CSS style
     
+other functions included
+========================
+
+    $('myElement').scrollBottom(); //return scroll bottom position ( scrollTop() inverted )
+    $('myElement').scrollRight(); //return scroll right position ( scrollLeft() inverted )
+    
 
 See a demonstration here : http://totodunet.github.io/
 
