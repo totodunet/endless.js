@@ -31,6 +31,6 @@
     "docs": "https://github.com/totodunet/endless.js",
     "download": "http://code.totodu.net/js/endless.js",
     "dependencies": {
-        "jquery": ">=1.1"
+        "jquery": ">=1.5"
     }
 }
