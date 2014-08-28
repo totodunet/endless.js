@@ -30,7 +30,7 @@ default values
     
     the scrollbar parameter default value depends of your CSS style
     
-other functions included
+others functions included
 ========================
 
     $('myElement').scrollBottom(); //return scroll bottom position ( scrollTop() inverted )
