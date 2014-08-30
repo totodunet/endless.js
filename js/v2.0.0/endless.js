@@ -45,18 +45,18 @@
 	
 	$.fn.scrollBottom=function(){
 		if($(this).is(document))
-			return $(this).height()-($(this).scrollTop()+$(window).height());
+			return $(this).height()-$(this).scrollTop()-$(window).height();
 		else
-			return ($(this).prop('scrollHeight')-$(this).prop('offsetHeight'))-$(this).scrollTop();
+			return $(this).prop('scrollHeight')-$(this).prop('offsetHeight')-$(this).scrollTop();
 	}
 	
 	//Function scrollRight() -> inverted scrollLeft() function
 	
 	$.fn.scrollRight=function(){
 		if($(this).is(document))
-			return $(this).width()-($(this).scrollLeft()+$(window).width());
+			return $(this).width()-$(this).scrollLeft()-$(window).width();
 		else{
-			return ($(this).prop('scrollWidth')-$(this).prop('offsetWidth'))-$(this).scrollLeft();
+			return $(this).prop('scrollWidth')-$(this).prop('offsetWidth')-$(this).scrollLeft();
 		}
 	}
 	
@@ -546,6 +546,8 @@
 				});
 			}
 		}
+		
+		return this;
 		
 	}
 })(jQuery);
