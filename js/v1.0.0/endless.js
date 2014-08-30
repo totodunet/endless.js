@@ -45,9 +45,9 @@
 	
 	$.fn.scrollBottom=function(){
 		if($(this).is(document))
-			return $(this).height()-($(this).scrollTop()+$(window).height());
+			return $(this).height()-$(this).scrollTop()-$(window).height();
 		else
-			return ($(this).prop('scrollHeight')-$(this).prop('offsetHeight'))-$(this).scrollTop();
+			return $(this).prop('scrollHeight')-$(this).prop('offsetHeight')-$(this).scrollTop();
 	}
 	
 	$.fn.endless=function(options){
@@ -258,5 +258,8 @@
 				}
 			});
 		}
+		
+		return this;
+		
 	}
 })(jQuery);
