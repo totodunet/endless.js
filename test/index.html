@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+
+<!--
+
+████████╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗███╗   ██╗███████╗████████╗
+╚══██╔══╝██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗██║   ██║████╗  ██║██╔════╝╚══██╔══╝
+   ██║   ██║   ██║   ██║   ██║   ██║██║  ██║██║   ██║██╔██╗ ██║█████╗     ██║
+   ██║   ██║   ██║   ██║   ██║   ██║██║  ██║██║   ██║██║╚██╗██║██╔══╝     ██║
+   ██║   ╚██████╔╝   ██║   ╚██████╔╝██████╔╝╚██████╔╝██║ ╚████║███████╗   ██║
+   ╚═╝    ╚═════╝    ╚═╝    ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
+
+/******************************************************************/
+/*                                                                */
+/*                   Endless.JS Demonstration                     */
+/*                                                                */
+/*              			by Totodunet                          */
+/*                         www.totodu.net                         */
+/*                                                                */
+/******************************************************************/
+
+-->
+
+<html lang="en-US">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+        <meta name="author" content="Totodunet - www.totodu.net"/>
+        <meta name="description" content="Endless.JS is a jQuery plugin allows to do website designed in cycle!"/>
+        <meta name="keywords" content="endless.js, jQuery plugin, unlimit scroll"/>
+        <meta name="robots" content="index,follow"/>
+        <title>Endless.JS - jQuery Plugin</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+		
+		<!-- Import jQuery Library -->
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		
+		<!-- Endless.JS Plugin -->
+		<script type="text/javascript" src="../js/minified/endless.min.js"></script>
+		
+		<!-- Mousewheel.js Plugin by Brandon Aaron -->
+		<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+		
+		<!-- JS script using endless.JS Plugin -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var count=0;
+				var prepend=false;
+				var append=false;
+				$(document).endless({
+					direction:'vertical',
+					prepend:function(){
+							$('body>.endless:first-child .count').text(count-1);
+							behavior();
+							prepend=true;
+						},
+					append:function(){
+							$('body>.endless:nth-child(2) .count').text(count+1);
+							behavior();
+							append=true;
+						},
+					n_prepend:function(){
+						if(prepend)
+							$('.count').text(count);
+						else
+							$('.count').text(++count);
+						append=false;
+						prepend=false;
+						behavior();
+					},
+					n_append:function(){
+						if(append)
+							$('.count').text(count);
+						else
+							$('.count').text(--count);
+						append=false;
+						prepend=false;
+						behavior();
+					}
+				});
+				behavior();
+			});
+			function behavior(){
+				$('article>div').mousewheel(function(e){
+					$(this).scrollLeft($(this).scrollLeft()-e.deltaY*100);
+					e.preventDefault();
+				});
+				$('.horizontal_scrolling').endless({
+					direction:'horizontal',
+					scrollbar:'disable'
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<span class="forkongithub"><a href="https://github.com/totodunet/endless.js/" target="_blank">Fork me on GitHub</a></span>
+			<p>TOP - Position : <span class="count">0</span></p>
+			<article>
+				<h1>Discover Endless.JS Plugin!</h1>
+				<p>Hello webmaster! Are you here because you search an original plugin for your website? This article is a demonstration of my jQuery plugin "Endless.JS". Endless.JS allows to do websites designed in cycle.</p>
+				<p>The idea is to join the top with the bottom or the left with the right. So when you are at the end or the beginning, you can scroll again and you will are done a complete tour.</p>
+				<p>The installation is very easy. You must just integrate endless.js in the HTML head (after have to import jQuery Library) of your website and to create a little JavaScript snippet to specify which elements will be endless. You can view the source-code of this page by right click in doubt case.</p>
+				<p>Example :</p>
+				<div>
+					<div class="horizontal_scrolling">
+						<div class="code">
+							<p><span>&lt;!-- Import jQuery Library --&gt;</span></p>
+							<p>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt;</p>
+							<p><span>&lt;!-- Integrate endless.js plugin --&gt;</span></p>
+							<p>&lt;script type="text/javascript" src="http://code.totodu.net/js/endless.js"&gt;&lt;/script&gt;</p>
+							<p><span>&lt;!-- Script using endless.js --&gt;</span></p>
+							<p>&lt;script type="text/javascript"&gt;</p>
+								<p>$(document).ready(function(){
+								<p>$('yourElement').endless({</p>
+								<p>direction:'vertical', <span>//Direction : up (infinite top scrolling), down (infinite bottom scrolling), vertical (infinite top and bottom scrolling)</span></p>
+								<p>scrollbar:'enable', <span>//Enable or disable the scrollbar</span></p>
+								<p>prepend:function(){alert("there isn't the boundary at the top");}, <span>//Running when content is prepended</span></p>
+								<p>append:function(){alert("there isn't the boundary at the bottom");}, <span>//Running when content is appended</span></p>
+								<p>n_prepend:function(){alert("you are now at the top");}, <span>//Running when content in duplicate is removed and that you come from the top</span></p>
+								<p>n_append:function(){alert("you are now at the bottom");} <span>//Running when content in duplicate is removed and that you come from the bottom</span></p>
+								<p>});</p><p>});&lt;/script&gt;</p>
+						</div>
+						<div class="code">
+							<p><span>&lt;!-- Import jQuery Library --&gt;</span></p>
+							<p>&lt;script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt;</p>
+							<p><span>&lt;!-- Integrate endless.js plugin --&gt;</span></p>
+							<p>&lt;script type="text/javascript" src="http://code.totodu.net/js/endless.js"&gt;&lt;/script&gt;</p>
+							<p><span>&lt;!-- Script using endless.js --&gt;</span></p>
+							<p>&lt;script type="text/javascript"&gt;</p>
+								<p>$(document).ready(function(){
+								<p>$('yourElement').endless({</p>
+								<p>direction:'horizontal', <span>//Direction : right (infinite right scrolling), left (infinite left scrolling), horizontal (infinite right and left scrolling)</span></p>
+								<p>scrollbar:'disable', <span>//Enable or disable the scrollbar</span></p>
+								<p>prepend:function(){alert("there isn't the boundary at the left");}, <span>//Running when content is prepended</span></p>
+								<p>append:function(){alert("there isn't the boundary at the right");}, <span>//Running when content is appended</span></p>
+								<p>n_prepend:function(){alert("you are now at the left");}, <span>//Running when content in duplicate is removed and that you come from the left</span></p>
+								<p>n_append:function(){alert("you are now at the right");} <span>//Running when content in duplicate is removed and that you come from the right</span></p>
+								<p>});</p><p>});&lt;/script&gt;</p>
+						</div>
+					</div>
+				</div>
+				<p>Plugin is available on GitHub</p><p><a href="https://github.com/totodunet/endless.js/" target="_blank"><img alt="github" src="http://blog.hatemalimam.com/wp-content/uploads/2013/12/github_login_icon.gif"/></a></p>
+				<p><small>You mustn't use id in your HTML code element which is in endless, prefer classes.</small></p>
+			</article>
+			<p>Copyright 2014, <a href="http://totodu.net/" target="_blank">Totodunet</a> - Endless.JS is published under <a href="http://opensource.org/licenses/MIT" target="_blank">The MIT License</a><p>
+			<p>BOTTOM</p>
+		</div>
+	</body>
+</html>

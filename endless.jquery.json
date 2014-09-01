@@ -25,12 +25,12 @@
             "url": "http://opensource.org/licenses/MIT"
         }
     ],
-	"demo": "http://totodunet.github.io/",
+	"demo": "http://totodunet.github.io/endless/",
 	"bugs": "https://github.com/totodunet/endless.js/issues",
     "homepage": "http://totodunet.github.io/",
     "docs": "https://github.com/totodunet/endless.js",
-    "download": "http://code.totodu.net/js/endless.js",
+    "download": "http://github.com/totodunet/endless.js/archive/master.zip",
     "dependencies": {
-        "jquery": ">=1.5"
+        "jquery": ">=1.6"
     }
 }

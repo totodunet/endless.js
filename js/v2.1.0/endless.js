@@ -5,7 +5,7 @@
 	  This plugin allows to join the top with the bottom or the left with the right of a HTML container.
 	  Useful to do websites designed in cycle!
 	  
-	  Needs the jQuery library. You can download it here : http://www.jquery.com/
+	  Needs the jQuery library. You can download it here : http://www.jquery.com/ - Version required >=1.6.0
 	  
 	  @author 	totodunet
 	  @date		August 27, 2014

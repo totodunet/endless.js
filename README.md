@@ -37,7 +37,7 @@ others functions included
     $('myElement').scrollRight(); //return scroll right position ( scrollLeft() inverted )
     
 
-See a demonstration here : http://totodunet.github.io/
+See a demonstration here : http://totodunet.github.io/endless/
 
 If you're interested, thanks to fork me or/and contribute to the development of endless.js!
 
