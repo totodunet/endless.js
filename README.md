@@ -7,7 +7,7 @@ endless.js
     
 It encapsulates automatically the target's content in div block. Your HTML page is infinity scrollable.
     
-parameters
+optional parameters
 ==========
 
     direction   //scroll direction ('up','down','left','right','vertical','horizontal')
