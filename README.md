@@ -2,7 +2,7 @@ endless.js
 ==========
 
 Note : If the v2.2.0 doesn't work correctly, use v2.1.0
-==
+--
 
     $(document).ready(function(){
         $(document).endless();
