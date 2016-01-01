@@ -1,8 +1,9 @@
 endless.js
 ==========
 
-Note : If the v2.2.0 doesn't work correctly, use v2.1.0
+Remark : If the v2.2.0 doesn't work correctly, use v2.1.0
 --
+These versions are identical. The v2.2.0 is just an alternative about working (more optimized) but could give some problems depending web browsers.
 
     $(document).ready(function(){
         $(document).endless();
