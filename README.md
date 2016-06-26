@@ -43,8 +43,6 @@ others functions included
 
 See a demonstration here : http://totodunet.github.io/endless/
 
-A website using infinite loop (endless) with jquery-scrollAdvance plugin : http://www.decimals-search.org/
-
 If you're interested, thanks to fork me or/and contribute to the development of endless.js!
 
 published under the MIT License (http://opensource.org/licenses/MIT)
